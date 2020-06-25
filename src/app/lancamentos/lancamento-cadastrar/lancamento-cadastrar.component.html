@@ -1,0 +1,73 @@
+<div class="container">
+
+  <form (ngSubmit)="salvar()" [formGroup]="formulario">
+    <div class="ui-g">
+
+      <div class="ui-g-12">
+        <h1>{{editando() ? 'Edição de ' : 'Novo ' }} Lançamento</h1>
+      </div>
+
+      <div class="ui-g-12">
+        <p-selectButton [options]="tipos" name="tipo" formControlName="tipo"></p-selectButton>
+      </div>
+
+      <div class="ui-g-3 ui-sm-6 ui-fluid">
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="vencimento"
+          formControlName="dataVencimento"></p-calendar>
+
+          <app-message [control]="formulario.get('dataVencimento')" error="required"
+            text="Informe uma data de vencimento"></app-message>
+      </div>
+
+      <div class="ui-g-3 ui-sm-6 ui-fluid">
+        <label>{{formulario.get('tipo').value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="pagamento" formControlName="dataPagamento">
+        </p-calendar>
+      </div>
+
+      <div class="ui-g-9 ui-sm-12 ui-fluid">
+        <label>Descrição</label>
+        <input type="text" pInputText name="descricao" formControlName="descricao" />
+
+          <app-message [control]="formulario.get('descricao')" error="obrigatoriedade"
+            text="Informe uma descrição"></app-message>
+          <app-message [control]="formulario.get('descricao')" error="tamanhoMinimo"
+            text="Mínimo de {{ formulario.get('descricao').errors?.tamanhoMinimo?.tamanho }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-3 ui-sm-12 ui-fluid">
+        <label>Valor</label>
+        <input type="text" pInputText currencyMask placeholder="0,00" name="valor" formControlName="valor"
+         [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }" />
+      </div>
+
+      <div class="ui-g-6 ui-sm-12 ui-fluid" formGroupName="categoria">
+        <label>Categoria</label>
+        <p-dropdown [options]="categorias" [filter]="true" name="categoria" placeholder="Selecione"
+          formControlName="codigo"></p-dropdown>
+      </div>
+
+      <div class="ui-g-6 ui-sm-12 ui-fluid" formGroupName="pessoa">
+        <label>Pessoa</label>
+        <p-dropdown [options]="pessoas" [filter]="true" name="pessoa" placeholder="Selecione"
+          formControlName="codigo"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Observação</label>
+        <textarea pInputTextarea name="observacao" rows="3" formControlName="observacao"></textarea>
+      </div>
+
+      <div class="ui-g-12">
+        <button type="submit" pButton label="Salvar" class="ui-button-success" [disabled]="formulario.invalid"></button>
+        <button type="button" pButton label="Novo" (click)="novo()"></button>
+        <a href="javascript:;" [routerLink]="['/lancamentos']">Voltar para pesquisa</a>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<p-toast position="bottom-right"></p-toast>

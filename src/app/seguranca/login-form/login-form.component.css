@@ -1,0 +1,9 @@
+.centralizar {
+  width: 450px;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+.ui-inputtext, .ui-button {
+  width: 100%;
+}

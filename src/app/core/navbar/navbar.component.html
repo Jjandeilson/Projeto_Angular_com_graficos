@@ -1,0 +1,30 @@
+<nav class="navbar">
+
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibirMenu = !exibirMenu">
+          <i class="pi pi-list"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar-menu" *ngIf="exibirMenu">
+    <li class="navbar-usuario">{{ authService.jwtPayload?.nome }}</li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"
+      *ngIf="authService.temPermissao('ROLE_PESQUISAR_LANCAMENTO')">
+        <a href="javascript:;" [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"
+    *ngIf="authService.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a href="javascript:;" [routerLink]="['/lancamentos']">Lançamentos</a></li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"
+      *ngIf="authService.temPermissao('ROLE_PESQUISAR_PESSOA')"><a href="javascript:;" [routerLink]="['/pessoas']">Pessoas</a></li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"
+    *ngIf="authService.temPermissao('ROLE_PESQUISAR_LANCAMENTO')">
+      <a href="javascript:;" [routerLink]="['/relatorios/lancamentos']">Relatório</a>
+  </li>
+    <li class="navbar-menu-item" routerLinkActive="ativo"><a href="javascript:;"
+        (click)="logout()">Logout</a></li>
+  </ul>
+</nav>

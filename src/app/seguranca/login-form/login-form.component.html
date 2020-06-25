@@ -1,0 +1,25 @@
+<div class="centralizar">
+  <form #form="ngForm" (ngSubmit)="logar()">
+
+    <div class="ui-g">
+
+      <div class="ui-g-12">
+        <h1>Login</h1>
+      </div>
+
+      <div class="ui-g-12">
+        <input type="text" pInputText name="email" [(ngModel)]="login" placeholder="E-mail" required />
+      </div>
+      <div class="ui-g-12">
+        <input type="password" pInputText name="senha" [(ngModel)]="senha" placeholder="Senha" required />
+      </div>
+      <div class="ui-g-12">
+        <button type="submit" pButton label="Login" [disabled]="form.invalid"></button>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<p-toast position="bottom-right"></p-toast>
